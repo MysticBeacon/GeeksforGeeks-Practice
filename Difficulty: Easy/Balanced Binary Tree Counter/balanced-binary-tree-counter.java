@@ -1,0 +1,28 @@
+
+class Solution {
+    static final long MOD = 1000000007L;
+
+    static long countBT(int h) {
+
+        // Base cases
+        if (h == 0) return 1;
+        if (h == 1) return 1;
+
+        long prev2 = 1; // dp[0]
+        long prev1 = 1; // dp[1]
+
+        for (int i = 2; i <= h; i++) {
+
+            long curr = (prev1 * prev1) % MOD;
+
+            curr = (curr + 
+                   (2 * prev1 % MOD) * prev2 % MOD) % MOD;
+
+            // Move to next iteration
+            prev2 = prev1;
+            prev1 = curr;
+        }
+
+        return prev1;
+    }
+}
